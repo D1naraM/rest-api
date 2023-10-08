@@ -1,5 +1,5 @@
 # Default ignored files
-/build/
+/.build/
 /.gradle/
 /out/
 /gradle/
