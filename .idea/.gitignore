@@ -1,0 +1,9 @@
+# Default ignored files
+/build/
+/.gradle/
+/out/
+/gradle/
+/.idea/
+/gradlew
+/gradlew.bat
+/config.json
