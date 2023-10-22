@@ -1,62 +1,74 @@
-package api;
+package api.lombokTests;
 
-import org.junit.jupiter.api.AfterAll;
+import api.baseTests.TestBase;
 import org.junit.jupiter.api.Test;
-import static io.restassured.RestAssured.get;
+
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.responseSpecification;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ApiTests extends TestBase {
     @Test
     void checkTotal() {
-        given()
+        ListUsersResponse response = given()
                 .log().method()
                 .when()
-                .get("https://reqres.in/api/users?page=2")
+                .get("/users?page=2")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("total", is(12));
+                .extract().as(ListUsersResponse.class);
+        assertEquals(12, response.getTotal());
     }
 
     @Test
     void createUser() {
-        String user = "{ \"name\": \"morpheus\", \"job\": \"leader\"}";
+        UserBody userData = new UserBody();
+        userData.setName("morpheus");
+        userData.setJob("leader");
 
-        given()
+        UserResponse response = given()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(user)
+                .body(userData)
                 .when()
                 .post("/users")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(201)
-                .body("name", is("morpheus"),
-                        "job", is("leader"));
+                .extract().as(UserResponse.class);
+
+        assertEquals("morpheus", response.getName());
+        assertEquals("leader", response.getJob());
     }
 
     @Test
     void updateUser() {
-        String userNewBody = "{ \"name\": \"morpheus\", \"job\": \"plumber\"}";
-        given()
+        UserBody userData = new UserBody();
+        userData.setName("morpheus");
+        userData.setJob("plumber");
+
+        UserResponse response = given()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(userNewBody)
+                .body(userData)
                 .when()
                 .post("/users/428")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(201)
-                .body("name", is("morpheus"),
-                        "job", is("plumber"));
+                .extract().as(UserResponse.class);
+        assertEquals("morpheus", response.getName());
+        assertEquals("plumber", response.getJob());
+
     }
 
     @Test
@@ -74,19 +86,25 @@ public class ApiTests extends TestBase {
     @Test
     void registerUser() {
 
-        String userNewBody = "{ \"email\": \"eve.holt@reqres.in\", \"password\": \"123456\"}";
-        given()
+        RegisterBody registerData = new RegisterBody();
+        registerData.setEmail("eve.holt@reqres.in");
+        registerData.setPassword("123456");
+
+        RegisterResponse response = given()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(userNewBody)
+                .body(registerData)
                 .when()
                 .post("/register")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("id",notNullValue(),
-                        "token", notNullValue());
+
+                .extract().as(RegisterResponse.class);
+        assertEquals(4, response.getId());
+        assertEquals("QpwL5tke4Pnpja7X4", response.getToken());
+
     }
 }
