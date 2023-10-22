@@ -1,4 +1,4 @@
-package api.base_tests;
+package api.basetests;
 
 import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;

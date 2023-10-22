@@ -1,6 +1,6 @@
-package api.lombok_tests;
+package api.lomboktests;
 
-import api.base_tests.TestBase;
+import api.basetests.TestBase;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
