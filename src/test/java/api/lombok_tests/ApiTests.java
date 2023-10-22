@@ -1,10 +1,9 @@
-package api.lombokTests;
+package api.lombok_tests;
 
-import api.baseTests.TestBase;
+import api.base_tests.TestBase;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.responseSpecification;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;

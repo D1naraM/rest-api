@@ -1,4 +1,4 @@
-package api.lombokTests;
+package api.lombok_tests;
 
 import lombok.Data;
 @Data

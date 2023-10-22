@@ -1,4 +1,4 @@
-package api.baseTests;
+package api.base_tests;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
