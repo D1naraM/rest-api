@@ -1,4 +1,4 @@
-package api.lomboktests;
+package api.models;
 
 import lombok.Data;
 

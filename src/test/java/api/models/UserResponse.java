@@ -1,7 +1,7 @@
-package api.lomboktests;
+package api.models;
 
 import lombok.Data;
 @Data
 public class UserResponse {
-    String name, job;
+    String name, job, id, createdAt;
 }
